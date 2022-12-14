@@ -21,6 +21,8 @@ def main(args):
     temp.temperature = -30
     logging.info(temp.to_fahrenheit())
 
+    unused_variable = 5
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
