@@ -8,11 +8,11 @@ Template code and examples for python project respecting the [PEP8 coding style]
 
 A *.gitignore* file makes sure that the Python temporary files are not committed. It is adapted from [here](https://github.com/github/gitignore/blob/main/Python.gitignore).
 
-git LFS is configured to handle all non script files (3D models, deep learning model, images, etc.). A good practice is also to use another repo as a submodule containing all the data.
+git LFS is configured to handle all non script files (3D models, deep learning model, images, etc.). The list of file is defined in *.gitattributes.* A good practice is also to use another repo as a submodule containing all the data.
 
 ### IDE 
 
-Visual code is recommended IDE. Make sure to install the python extension and [configure](https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0) VS code to automatically format the code with [black](https://black.readthedocs.io).
+Visual code is the recommended IDE. Make sure to install the python extension and [configure](https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0) VS code to automatically format the code with [black](https://black.readthedocs.io).
 
 **A code not compliant with PEP8 guidelines will not be merged.**
 
@@ -47,14 +47,17 @@ The issue system is a great tool to track problem, bugs, new features, etc. Comm
  
  5. Create unit test to validate the new code (see below).
 
- 6. When the work is implemented, create a *pull request*. Easiest way is to do it from the [branch page](https://github.com/pollen-robotics/unity-workflow/branches) of the repo.
+ 6. When the work is implemented, create a *pull request*. Easiest way is to do it from the branch page of the repo.
  
  7. At the PR creation, unit tests will be computed and result reported. The branch will not be merged until they pass. Besides, the project is configured so a developer cannot merge his/her own code. An external review is mandatory.
  8. Merge is completed, go to step 1.
 
  ### Unit tests
 
- Unit test must be written to ensure code robustness. [Pytest](https://docs.pytest.org) is the recommanded tool. Examples are provided in the *tests* folder.
+ Unit tests must be written to ensure code robustness. [Pytest](https://docs.pytest.org) is the recommended tool. Examples are provided in the *tests* folder.
  
- The developer must run the test locally before committing any new code. These tests are automatically called when a pull request is triggered. Note that a draft pull request can be made to run the tests on github with an unfinished work.
+ The developer must run the test locally before committing any new code. Make sure that pytest is installed and run at the root level:
+ ```
+ pytest
+ ```
 
