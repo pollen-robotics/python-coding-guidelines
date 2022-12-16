@@ -10,9 +10,13 @@ A *.gitignore* file makes sure that the Python temporary files are not committed
 
 git LFS is configured to handle all non script files (3D models, deep learning model, images, etc.). The list of file is defined in *.gitattributes.* A good practice is also to use another repo as a submodule containing all the data.
 
-### IDE 
+A git hook can be installed to automatically checks PEP8 compliance before a commit. See *scripts/git_hooks*.
+
+### IDE - Linting
 
 Visual code is the recommended IDE. Make sure to install the python extension and [configure](https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0) VS code to automatically format the code with [black](https://black.readthedocs.io).
+
+[Flake8](https://flake8.pycqa.org) will perform complementary checks. Select *flake8* as the [linter for VS Code](https://code.visualstudio.com/docs/python/linting). Errors should be directly indicated within the code.
 
 **A code not compliant with PEP8 guidelines will not be merged.**
 
