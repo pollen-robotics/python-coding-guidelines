@@ -23,9 +23,27 @@ jobs:
         run: |
           coverage run -m pytest
           coverage xml
+          coverage json
       - name: Get Cover 
         uses: orgoro/coverage@v3
         with:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Combine"
+        run: |
+          export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
+          echo "total=$TOTAL" >> $GITHUB_ENV
+          echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
+      - name: "Make badge"
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          # GIST_TOKEN is a GitHub personal access token with scope "gist".
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 58642e8fe4589e710e26627e39ff92d7   # replace with your real Gist id.
+          filename: covbadge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}
 
