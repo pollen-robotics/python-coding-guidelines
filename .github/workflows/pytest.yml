@@ -24,17 +24,23 @@ jobs:
           coverage run -m pytest
           coverage xml
           coverage json
+          coverage html
+      - name: Archive code coverage html report
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: htmlcov
       - name: Get Cover 
         uses: orgoro/coverage@v3
         with:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Combine"
+      - name: Extract results
         run: |
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
           echo "total=$TOTAL" >> $GITHUB_ENV
           echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
-      - name: "Make badge"
+      - name: Make badge
         uses: schneegans/dynamic-badges-action@v1.6.0
         with:
           # GIST_TOKEN is a GitHub personal access token with scope "gist".
