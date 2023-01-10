@@ -2,13 +2,17 @@
 
 Template code and examples for python project respecting the [PEP8 coding style](https://peps.python.org/pep-0008/).
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) ![linter](https://github.com/pollen-robotics/python-coding-guidelines/actions/workflows/lint.yml/badge.svg) ![pytest](https://github.com/pollen-robotics/python-coding-guidelines/actions/workflows/pytest.yml/badge.svg) ![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/FabienDanieau/58642e8fe4589e710e26627e39ff92d7/raw/covbadge.json)
+
+
+
 ## Configuration
 
 ### git
 
 A *.gitignore* file makes sure that the Python temporary files are not committed. It is adapted from [here](https://github.com/github/gitignore/blob/main/Python.gitignore).
 
-git LFS is configured to handle all non script files (3D models, deep learning model, images, etc.). The list of file is defined in *.gitattributes.* A good practice is also to use another repo as a submodule containing all the data.
+git LFS is configured to handle all non script files (3D models, deep learning model, images, etc.). The list of file is defined in *.gitattributes.* Also, a good practice is to use another repo as a submodule containing all the data.
 
 A git hook can be installed to automatically checks PEP8 compliance before a commit. See *scripts/git_hooks*.
 
@@ -56,12 +60,18 @@ The issue system is a great tool to track problem, bugs, new features, etc. Comm
  7. At the PR creation, unit tests will be computed and result reported. The branch will not be merged until they pass. Besides, the project is configured so a developer cannot merge his/her own code. An external review is mandatory.
  8. Merge is completed, go to step 1.
 
- ### Unit tests
+ ### Unit tests and test coverage
 
  Unit tests must be written to ensure code robustness. [Pytest](https://docs.pytest.org) is the recommended tool. Examples are provided in the *tests* folder.
  
- The developer must run the test locally before committing any new code. Make sure that pytest is installed and run at the root level:
- ```
- pytest
- ```
+It is recommended to have at least 90% of the code tested. The [coverage](https://coverage.readthedocs.io) package provide this metric.
 
+ The developer must run the test locally before committing any new code. Make sure that *pytest* and *coverage* are installed and run at the root level:
+ ```
+ coverage run -m pytest
+ ```
+Then, if all tests are sucessful:
+ ```
+ coverage report
+ ```
+ These tests are automatically performed by a github action when a pull request is created.
